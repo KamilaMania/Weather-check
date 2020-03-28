@@ -3,7 +3,8 @@
 const cityForm = document.querySelector("form");
 const card = document.querySelector(".card");
 const details = document.querySelector(".details");
-
+const time = document.querySelector("img.time");
+const icon = document.querySelector(".icon img");
 const updateUI = data => {
   //distructering properties
   const { cityDetails, weather } = data;
@@ -16,18 +17,29 @@ const updateUI = data => {
             <span>${weather.Temperature.Metric.Value}</span>
             <spam>&deg;C</spam>
           </div>`;
+
+  //day & night photo & icon
+  const iconSrc = `img/icons/${weather.WeatherIcon}.svg`;
+  icon.setAttribute("src", iconSrc);
+
+  let timeSrc = null;
+  if (weather.IsDayTime) {
+    timeSrc = "img/day.svg";
+  } else {
+    timeSrc = "img/night.svg";
+  }
+  time.setAttribute("src", timeSrc);
+
   //remove the d-none class if present
   if (card.classList.contains("d-none")) {
     card.classList.remove("d-none");
   }
 };
+
 const udpateCity = async city => {
   const cityDetails = await getCity(city);
   const weather = await getWeather(cityDetails.Key);
-  return {
-    cityDetails,
-    weather
-  };
+  return { cityDetails, weather };
 };
 
 cityForm.addEventListener("submit", e => {
