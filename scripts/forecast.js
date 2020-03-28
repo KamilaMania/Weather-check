@@ -4,9 +4,9 @@ class Forecast {
   constructor() {
     this.key = "1DU7sAz41eTDuUaY04pJPicUbdaOQ551";
     this.weatherURL =
-      "http://dataservice.accuweather.com/currentconditions/v1/";
+      "https://dataservice.accuweather.com/currentconditions/v1/";
     this.cityURL =
-      " http://dataservice.accuweather.com/locations/v1/cities/search";
+      " https://dataservice.accuweather.com/locations/v1/cities/search";
   }
   async updateCity(city) {
     const cityDetails = await this.getCity(city);
